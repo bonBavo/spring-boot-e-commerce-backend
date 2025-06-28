@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Map;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -50,9 +51,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(
+    public ResponseEntity<?> registerUser(
             UriComponentsBuilder uriBuilder,
             @Valid @RequestBody RegisterUserRequest request) {
+
+        if(userRepository.existsByEmail(request.getEmail()))
+            return ResponseEntity.badRequest().body(Map.of("message", "Email already exists."));
+
         var user  = userMapper.toEntity(request);
         userRepository.save(user);
         var userDto = userMapper.toDto(user);
@@ -102,35 +107,3 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @GetMapping("/{id}")
-//    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
-//        var user = userRepository.findById(id).orElse(null);
-//        if (user == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        var userDto = new UserDto(user.getId(), user.getName(), user.getEmail());
-//        return ResponseEntity.ok(userDto);
-//    }
-
-
-//    @GetMapping
-//    public Iterable<UserDto> getUsers() {
-//        return userRepository.findAll()
-//                .stream()
-//                .map(user -> new UserDto(user.getId(), user.getName(), user.getEmail()))
-//                .toList();
-//    }
