@@ -1,15 +1,11 @@
 package com.bonbravo.store.controllers;
 
-import com.bonbravo.store.dtos.ProductDto;
-import com.bonbravo.store.dtos.UserDto;
+import com.bonbravo.store.dto.ProductDto;
 import com.bonbravo.store.mappers.ProductMapper;
 import com.bonbravo.store.models.Product;
 import com.bonbravo.store.repositories.CategoryRepository;
 import com.bonbravo.store.repositories.ProductRepository;
-import com.bonbravo.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Limit;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;

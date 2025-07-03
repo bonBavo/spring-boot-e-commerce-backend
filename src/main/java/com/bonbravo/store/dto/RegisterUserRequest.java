@@ -1,4 +1,4 @@
-package com.bonbravo.store.dtos;
+package com.bonbravo.store.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

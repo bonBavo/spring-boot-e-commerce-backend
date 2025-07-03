@@ -1,9 +1,9 @@
 package com.bonbravo.store.controllers;
 
-import com.bonbravo.store.dtos.ChangePasswordRequest;
-import com.bonbravo.store.dtos.RegisterUserRequest;
-import com.bonbravo.store.dtos.UpdateUserRequest;
-import com.bonbravo.store.dtos.UserDto;
+import com.bonbravo.store.dto.ChangePasswordRequest;
+import com.bonbravo.store.dto.RegisterUserRequest;
+import com.bonbravo.store.dto.UpdateUserRequest;
+import com.bonbravo.store.dto.UserDto;
 import com.bonbravo.store.mappers.UserMapper;
 import com.bonbravo.store.repositories.UserRepository;
 import jakarta.validation.Valid;
