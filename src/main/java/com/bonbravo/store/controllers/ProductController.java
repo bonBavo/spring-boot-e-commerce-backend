@@ -23,11 +23,6 @@ public class ProductController {
     private final ProductMapper productMapper;
     private final CategoryRepository categoryRepository;
 
-    @GetMapping("{id}")
-    public ProductDto getProduct(@PathVariable Long id){
-        return productMapper.toDto(productRepository.findById(id).orElse(null));
-    }
-
     @GetMapping
     public Iterable<ProductDto> getProducts(@RequestParam(required = false, defaultValue = "") String sort,
                                             @RequestParam(required = false, defaultValue = "", name = "categoryId") Byte categoryId
@@ -48,6 +43,11 @@ public class ProductController {
                 .map(productMapper::toDto)
                 .toList();
 
+    }
+
+    @GetMapping("/{id}")
+    public ProductDto getProduct(@PathVariable Long id){
+        return productMapper.toDto(productRepository.findById(id).orElse(null));
     }
 
     @PostMapping
@@ -89,7 +89,7 @@ public class ProductController {
         return ResponseEntity.ok(request);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ProductDto> deleteUser(@PathVariable(name = "id") Long id) {
         var product = productRepository.findById(id).orElse(null);
         if (product == null)

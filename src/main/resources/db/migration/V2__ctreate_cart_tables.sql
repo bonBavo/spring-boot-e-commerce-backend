@@ -5,6 +5,7 @@ create table carts
     date_created datetime not null default CURRENT_TIMESTAMP
 
 );
+
 create table cart_items
 (
     id         bigint auto_increment
@@ -21,4 +22,3 @@ create table cart_items
         foreign key (product_id) references products (id)
             on delete cascade
 );
-

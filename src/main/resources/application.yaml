@@ -7,5 +7,9 @@ spring:
     password: bonBravo
   jpa:
     show-sql: true
+  jwt:
+    secret: ${JWT_SECRET}
+    accessTokenExpiration: 3000
+    refreshTokenExpiration: 604800
 
 

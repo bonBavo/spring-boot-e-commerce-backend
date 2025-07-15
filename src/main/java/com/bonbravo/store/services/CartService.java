@@ -9,12 +9,9 @@ import com.bonbravo.store.models.Cart;
 import com.bonbravo.store.repositories.CartRepository;
 import com.bonbravo.store.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Map;
 import java.util.UUID;
 
 @AllArgsConstructor

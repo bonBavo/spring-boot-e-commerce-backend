@@ -5,6 +5,7 @@ import com.bonbravo.store.dto.RegisterUserRequest;
 import com.bonbravo.store.dto.UpdateUserRequest;
 import com.bonbravo.store.dto.UserDto;
 import com.bonbravo.store.mappers.UserMapper;
+import com.bonbravo.store.models.Role;
 import com.bonbravo.store.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.util.Map;
 import java.util.Set;
 
@@ -45,6 +45,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
         var user = userRepository.findById(id).orElse(null);
+
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
@@ -63,6 +64,7 @@ public class UserController {
 
         var user  = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
         var userDto = userMapper.toDto(user);
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
@@ -70,9 +72,8 @@ public class UserController {
     }
 
 
-
-    @PutMapping("{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id,
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") Long id,
                                               @RequestBody UpdateUserRequest request) {
         var user = userRepository.findById(id).orElse(null);
         if (user == null) {
@@ -85,7 +86,7 @@ public class UserController {
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> deleteUser(@PathVariable(name = "id") Long id) {
         var user = userRepository.findById(id).orElse(null);
         if (user == null)
