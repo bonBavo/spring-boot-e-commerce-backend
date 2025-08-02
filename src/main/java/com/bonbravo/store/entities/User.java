@@ -1,4 +1,4 @@
-package com.bonbravo.store.models;
+package com.bonbravo.store.entities;
 
 
 import jakarta.persistence.*;
@@ -39,5 +39,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<Address> addresses = new ArrayList<>();
+
 
 }

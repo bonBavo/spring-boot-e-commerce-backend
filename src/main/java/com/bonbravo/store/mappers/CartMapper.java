@@ -3,8 +3,8 @@ package com.bonbravo.store.mappers;
 
 import com.bonbravo.store.dto.CartDto;
 import com.bonbravo.store.dto.CartItemDto;
-import com.bonbravo.store.models.Cart;
-import com.bonbravo.store.models.CartItem;
+import com.bonbravo.store.entities.Cart;
+import com.bonbravo.store.entities.CartItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

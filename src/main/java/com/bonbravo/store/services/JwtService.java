@@ -1,8 +1,7 @@
 package com.bonbravo.store.services;
 
 import com.bonbravo.store.config.JwtConfig;
-import com.bonbravo.store.models.Role;
-import com.bonbravo.store.models.User;
+import com.bonbravo.store.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -26,6 +25,7 @@ public class JwtService {
     }
 
     private Jwt generateToken(User user, long tokenValidityInSeconds) {
+ //jwts.builder() is deprecated, use Jwts.claims().build() instead
         var claims = Jwts.claims()
                 .subject(user.getId().toString())
                 .add("email", user.getEmail())
@@ -37,14 +37,6 @@ public class JwtService {
         return new Jwt(claims, jwtConfig.getSecretKey());
     }
 
-//    public boolean validateToken(String token){
-//        try {
-//            var  claims = getClaims(token);
-//            return  claims.getExpiration().after(new Date());
-//        }catch (JwtException e){
-//            return false;
-//        }
-//    }
 
     public Jwt parseToken(String token){
         try {
@@ -63,11 +55,4 @@ public class JwtService {
                 .getPayload();
     }
 
-//    public Long getUserIdFromToken(String token) {
-//        return Long.valueOf(getClaims(token).get("userId").toString());
-//    }
-
-//    public Role getRole(String token) {
-//        return Role.valueOf(getClaims(token).get("role", String.class));
-//    }
 }

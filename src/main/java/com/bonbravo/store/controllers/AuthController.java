@@ -55,6 +55,21 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(accessToken.toString()));
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> me(){
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var userId = Long.valueOf(authentication.getPrincipal().toString());
+        System.out.println("User ID: " + userId);
+        var user = userRepository.findById(userId).orElse(null);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        var userDto = userMapper.toDto(user);
+
+        return ResponseEntity.ok(userDto);
+    }
+
     @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> refresh(
             @CookieValue(value = "refreshToken") String refreshToken
@@ -69,23 +84,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponse(accessToken.toString()));
     }
-
-    @GetMapping("/me")
-    public ResponseEntity<UserDto> me(){
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        var userId = (Long)authentication.getPrincipal();
-
-        var user = userRepository.findById(userId).orElse(null);
-        if(user == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        var userDto = userMapper.toDto(user);
-
-        return ResponseEntity.ok(userDto);
-    }
-
-
+                
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Void> handleBadCredentialsException(){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

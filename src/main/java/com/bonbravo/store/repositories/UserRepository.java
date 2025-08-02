@@ -1,6 +1,6 @@
 package com.bonbravo.store.repositories;
 
-import com.bonbravo.store.models.User;
+import com.bonbravo.store.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

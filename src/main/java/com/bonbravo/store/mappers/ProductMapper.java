@@ -1,7 +1,7 @@
 package com.bonbravo.store.mappers;
 
 import com.bonbravo.store.dto.ProductDto;
-import com.bonbravo.store.models.Product;
+import com.bonbravo.store.entities.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

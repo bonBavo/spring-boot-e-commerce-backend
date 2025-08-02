@@ -5,7 +5,7 @@ import com.bonbravo.store.dto.RegisterUserRequest;
 import com.bonbravo.store.dto.UpdateUserRequest;
 import com.bonbravo.store.dto.UserDto;
 import com.bonbravo.store.mappers.UserMapper;
-import com.bonbravo.store.models.Role;
+import com.bonbravo.store.entities.Role;
 import com.bonbravo.store.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,8 +27,6 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
-
-
 
     @GetMapping
     public Iterable<UserDto> getUsers(

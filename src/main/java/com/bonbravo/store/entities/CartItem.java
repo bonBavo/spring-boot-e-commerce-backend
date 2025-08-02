@@ -1,4 +1,4 @@
-package com.bonbravo.store.models;
+package com.bonbravo.store.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

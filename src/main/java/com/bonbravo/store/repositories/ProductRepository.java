@@ -1,7 +1,6 @@
 package com.bonbravo.store.repositories;
 
-import com.bonbravo.store.models.Product;
-import jakarta.persistence.Entity;
+import com.bonbravo.store.entities.Product;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

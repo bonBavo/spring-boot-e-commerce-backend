@@ -5,7 +5,7 @@ import com.bonbravo.store.dto.CartItemDto;
 import com.bonbravo.store.exceptions.CartNotFoundException;
 import com.bonbravo.store.exceptions.ProductNotFoundException;
 import com.bonbravo.store.mappers.CartMapper;
-import com.bonbravo.store.models.Cart;
+import com.bonbravo.store.entities.Cart;
 import com.bonbravo.store.repositories.CartRepository;
 import com.bonbravo.store.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class CartService {
         return cartMapper.toDto(cart);
     }
 
-    public CartItemDto addToCart(@PathVariable UUID cartId, Long productId){
+    public CartItemDto addToCart(UUID cartId, Long productId){
         var cart = cartRepository.getCartWithItems(cartId).orElse(null);
         if (cart == null)
             throw new CartNotFoundException();
@@ -43,6 +43,25 @@ public class CartService {
 
         return cartMapper.toDto(cartItem);
     }
+    /*
+    public CartItemDto addToCart(UUID cartId, Long productId) {
+        var cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        if (cart == null) {
+            throw new CartNotFoundException();
+        }
+
+        var product = productRepository.findById(productId).orElse(null);
+        if (product == null) {
+            throw new ProductNotFoundException();
+        }
+
+        var cartItem = cart.addItem(product);
+
+        cartRepository.save(cart);
+
+        return cartMapper.toDto(cartItem);
+    }
+    * */
 
     public CartDto getCartItem(UUID id){
         var cart = cartRepository.getCartWithItems(id).orElse(null);

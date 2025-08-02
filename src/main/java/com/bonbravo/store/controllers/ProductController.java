@@ -1,8 +1,8 @@
 package com.bonbravo.store.controllers;
 
 import com.bonbravo.store.dto.ProductDto;
+import com.bonbravo.store.entities.Product;
 import com.bonbravo.store.mappers.ProductMapper;
-import com.bonbravo.store.models.Product;
 import com.bonbravo.store.repositories.CategoryRepository;
 import com.bonbravo.store.repositories.ProductRepository;
 import lombok.AllArgsConstructor;

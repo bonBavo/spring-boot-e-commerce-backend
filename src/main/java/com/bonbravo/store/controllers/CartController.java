@@ -43,8 +43,8 @@ public class CartController {
             @PathVariable UUID cartId,
             @RequestBody AddItemToCartRequest request
     ){
-      var cartItemdto = cartService.addToCart(cartId, request.getProductId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(cartItemdto);
+      var cartItemDto = cartService.addToCart(cartId, request.getProductId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
     }
 
 

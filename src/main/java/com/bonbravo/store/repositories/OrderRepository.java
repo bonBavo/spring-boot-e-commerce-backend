@@ -1,17 +1,17 @@
 package com.bonbravo.store.repositories;
 
-import com.bonbravo.store.entities.Cart;
+import com.bonbravo.store.entities.Order;
+import com.bonbravo.store.entities.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.List;
 
-public interface CartRepository extends JpaRepository<Cart, UUID> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @EntityGraph(attributePaths = "items.product")
-    @Query("SELECT c FROM Cart c WHERE c.id = :cartId")
-    Optional<Cart> getCartWithItems(@Param("cartId") UUID uuid);
+    @Query("select o from Order o where o.customer = :customer")
+    List<Order> getAllByCustomer(@Param("customer") User customer);
 }

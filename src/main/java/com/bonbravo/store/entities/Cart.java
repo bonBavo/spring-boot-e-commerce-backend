@@ -1,4 +1,4 @@
-package com.bonbravo.store.models;
+package com.bonbravo.store.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -33,13 +33,15 @@ public class Cart {
     }
 
     public CartItem getCartItem(Long productId) {
-        return items.stream().filter(item -> item.getId().equals(productId)).findFirst().orElse(null);
+        return items.stream().filter(item -> item.getProduct().getId().equals(productId)).findFirst().orElse(null);
     }
     public CartItem addItem(Product product) {
         var cartItem = getCartItem(product.getId());
 
         if (cartItem != null) {
             cartItem.setQuantity(cartItem.getQuantity() + 1);
+            System.out.println(cartItem.getQuantity() + " " + product.getName());
+
         }else {
             cartItem = new CartItem();
             cartItem.setProduct(product);
@@ -61,5 +63,7 @@ public class Cart {
         items.clear();
     }
 
-
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
 }
